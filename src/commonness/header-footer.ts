@@ -1,15 +1,13 @@
 // import style from "../style.css?inline";
 // 웹 컴포넌트(Web Components)”로 헤더를 만들기 위한 커스텀 엘리먼트 클래스
 class NikeHeader extends HTMLElement {
-  private root: ShadowRoot;
-  constructor() {
-    super();
-    this.root = this.attachShadow({ mode: "open" });
+  connectedCallback() {
+    this.render();
   }
 
-  connectedCallback() {
-    this.root.innerHTML = `
-      <style>
+  // UI를 렌더링
+  render() {
+    this.innerHTML = `      <style>
         @import "../src/style.css";
       </style>
       <!-- 유틸바 -->
@@ -35,7 +33,7 @@ class NikeHeader extends HTMLElement {
 
       <!-- 메인 헤더 -->
       <div class="w-full bg-white md:bg-[#f7f7f7]">
-        <div class="max-w-1280px mx-auto px-40">
+        <div class="max-w-1280px mx-auto px-6">
           <div class="h-16 flex items-center justify-between">
             <!-- 좌: 로고 -->
             <a href="/index.html" aria-label="나이키 홈페이지" class="inline-flex items-center shrink-0">
@@ -95,21 +93,21 @@ class NikeHeader extends HTMLElement {
             </div>
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
   }
 }
+
 customElements.define("nike-header", NikeHeader);
 
 export class FooterBar extends HTMLElement {
-  private root: ShadowRoot;
-  constructor() {
-    super();
-    this.root = this.attachShadow({ mode: "open" });
-  }
   connectedCallback() {
-    this.root.innerHTML = `
-    <style>
+    this.render();
+  }
+
+  render() {
+    this.innerHTML = `
+
+        <style>
       @import "../src/style.css";
     </style>
     <footer class="absolute bottom-0 w-full text-black/80">
@@ -179,8 +177,6 @@ export class FooterBar extends HTMLElement {
     `;
   }
 }
-
-// console.log(style.slice(0, 2000));
 
 // 이걸 실행해야 브라우저가 <nike-header></nike-header>를 인식
 customElements.define("footer-bar", FooterBar);

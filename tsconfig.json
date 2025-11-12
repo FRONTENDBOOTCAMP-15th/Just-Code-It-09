@@ -10,7 +10,7 @@
     "module": "es2022",
     "target": "es2022",
     "moduleResolution": "bundler",
-    "types": [],
+    "types": ["vite/client"],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
