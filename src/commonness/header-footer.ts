@@ -7,7 +7,8 @@ class NikeHeader extends HTMLElement {
 
   // UI를 렌더링
   render() {
-    this.innerHTML = `      <style>
+    this.innerHTML = `
+      <style>
         @import "../src/style.css";
       </style>
       <!-- 유틸바 -->
@@ -93,7 +94,8 @@ class NikeHeader extends HTMLElement {
             </div>
           </div>
         </div>
-      </div>`;
+      </div>
+    `;
   }
 }
 
@@ -107,73 +109,73 @@ export class FooterBar extends HTMLElement {
   render() {
     this.innerHTML = `
 
-        <style>
-      @import "../src/style.css";
-    </style>
-    <footer class="absolute bottom-0 w-full text-black/80">
-      <div>
-        <div class="max-w-1280px mx-auto px-6">
-        <hr class="border-t border-black/10" />
-          <!-- 링크 섹션 -->
-          <section class="grid grid-cols-1 gap-10 py-10 text-[13px] text-[#111] md:grid-cols-3" aria-label="푸터 링크">
-            <nav class="space-y-3" aria-labelledby="g-help bg-red-400">
-              <h3 id="g-help" class="mb-3 font-semibold text-black/80">안내</h3>
-              <ul class="m-0 list-none p-0 space-y-3">
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">멤버가입</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">매장찾기</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">나이키 저널</a></li>
-              </ul>
-            </nav>
-
-            <nav class="space-y-3" aria-labelledby="g-support">
-              <h3 id="g-support" class="mb-3 font-semibold text-black/80">고객센터</h3>
-              <ul class="m-0 list-none p-0 space-y-3">
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">주문/배송조회</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">반품 정책</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">결제 방법</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">공지사항</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">문의하기</a></li>
-              </ul>
-            </nav>
-
-            <nav class="space-y-3" aria-labelledby="g-about">
-              <h3 id="g-about" class="mb-3 font-semibold text-black/80">회사소개</h3>
-              <ul class="m-0 list-none p-0 space-y-3">
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">About Nike</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">소식</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">채용</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">투자자</a></li>
-                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">지속가능성</a></li>
-              </ul>
-            </nav>
-          </section>
-
-          <!-- 정책/저작권 -->
-          <section class="flex flex-col gap-3 py-4 text-xs text-black/70 md:flex-row md:items-center md:justify-start" aria-label="정책 및 저작권">
-            <p class="m-0">© 2024 Nike, Inc. All Rights Reserved</p>
-            <ul class="m-0 list-none p-0 flex flex-wrap gap-x-5 gap-y-2">
-              <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">이용약관</a></li>
-              <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">개인정보처리방침</a></li>
-              <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">위치정보이용약관</a></li>
-              <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">영상정보처리기기 운영 방침</a></li>
-            </ul>
-          </section>
-
+      <style>
+        @import "../src/style.css";
+      </style>
+      <footer class="absolute bottom-0 w-full text-black/80">
+        <div>
+          <div class="max-w-1280px mx-auto px-6">
           <hr class="border-t border-black/10" />
+            <!-- 링크 섹션 -->
+            <section class="grid grid-cols-1 gap-10 py-10 text-[13px] text-[#111] md:grid-cols-3" aria-label="푸터 링크">
+              <nav class="space-y-3" aria-labelledby="g-help bg-red-400">
+                <h3 id="g-help" class="mb-3 font-semibold text-black/80">안내</h3>
+                <ul class="m-0 list-none p-0 space-y-3">
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">멤버가입</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">매장찾기</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">나이키 저널</a></li>
+                </ul>
+              </nav>
 
-          <!-- 회사 정보 -->
-          <section class="w-[690px] py-4 pb-6 text-xs leading-[1.7] text-black/70" aria-label="회사 정보">
-            <p class="m-0">
-              (유)나이키코리아 대표 Kimberly Lynn Chang Mendes, 케네디 정 멘데스 | 서울 강남구 테헤란로 152 강남파이낸스센터 30층 | 통신판매업신고번호 2011-서울강남-03461 | 등록번호 220-88-09068 | 사업자정보 확인
-            </p>
-            <p class="m-0">
-              고객센터 전화: 080-022-0182 | FAX: 02-6744-5880 | 이메일:
-              <a href="mailto:service@nike.co.kr" class="hover:underline underline-offset-4">service@nike.co.kr</a> | 호스팅서비스사업자: (유)나이키코리아
-            </p>
-          </section>
+              <nav class="space-y-3" aria-labelledby="g-support">
+                <h3 id="g-support" class="mb-3 font-semibold text-black/80">고객센터</h3>
+                <ul class="m-0 list-none p-0 space-y-3">
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">주문/배송조회</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">반품 정책</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">결제 방법</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">공지사항</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">문의하기</a></li>
+                </ul>
+              </nav>
+
+              <nav class="space-y-3" aria-labelledby="g-about">
+                <h3 id="g-about" class="mb-3 font-semibold text-black/80">회사소개</h3>
+                <ul class="m-0 list-none p-0 space-y-3">
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">About Nike</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">소식</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">채용</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">투자자</a></li>
+                  <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">지속가능성</a></li>
+                </ul>
+              </nav>
+            </section>
+
+            <!-- 정책/저작권 -->
+            <section class="flex flex-col gap-3 py-4 text-xs text-black/70 md:flex-row md:items-center md:justify-start" aria-label="정책 및 저작권">
+              <p class="m-0">© 2024 Nike, Inc. All Rights Reserved</p>
+              <ul class="m-0 list-none p-0 flex flex-wrap gap-x-5 gap-y-2">
+                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">이용약관</a></li>
+                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">개인정보처리방침</a></li>
+                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">위치정보이용약관</a></li>
+                <li><a class="no-underline text-inherit hover:underline underline-offset-4" href="#">영상정보처리기기 운영 방침</a></li>
+              </ul>
+            </section>
+
+            <hr class="border-t border-black/10" />
+
+            <!-- 회사 정보 -->
+            <section class="w-[690px] py-4 pb-6 text-xs leading-[1.7] text-black/70" aria-label="회사 정보">
+              <p class="m-0">
+                (유)나이키코리아 대표 Kimberly Lynn Chang Mendes, 케네디 정 멘데스 | 서울 강남구 테헤란로 152 강남파이낸스센터 30층 | 통신판매업신고번호 2011-서울강남-03461 | 등록번호 220-88-09068 | 사업자정보 확인
+              </p>
+              <p class="m-0">
+                고객센터 전화: 080-022-0182 | FAX: 02-6744-5880 | 이메일:
+                <a href="mailto:service@nike.co.kr" class="hover:underline underline-offset-4">service@nike.co.kr</a> | 호스팅서비스사업자: (유)나이키코리아
+              </p>
+            </section>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
     `;
   }
 }
