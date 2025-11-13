@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { getAxios } from "../../utils/axios";
 import type { ProductList, ProductListRes } from "../../utils/types";
-import { codes } from "../../utils/\bcategories";
+import { codes } from "../../utils/categories";
 
 const axiosInstance = getAxios();
 
