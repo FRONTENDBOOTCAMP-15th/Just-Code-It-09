@@ -63,8 +63,8 @@ if (data?.ok) {
 }
 
 // 정렬 버튼
-const sortBtn = document.getElementById("sort-btn") as HTMLButtonElement | null;
-const sortMenu = document.getElementById("sort-menu") as HTMLDivElement | null;
+const sortBtn = document.getElementById("sort-btn");
+const sortMenu = document.getElementById("sort-menu");
 
 if (sortBtn && sortMenu) {
   sortBtn.addEventListener("click", () => {
@@ -73,6 +73,26 @@ if (sortBtn && sortMenu) {
       sortMenu.className = sortMenu.className.replace("hidden", "");
     } else {
       sortMenu.className += "hidden";
+    }
+  });
+}
+
+// 필터 숨기기로 사이드바 숨기기!!! 하기싫다
+const hiddenFilterBtn = document.getElementById("hidden-filter");
+const desktopSidebar = document.getElementById("desktop-sidebar");
+
+if (hiddenFilterBtn && desktopSidebar) {
+  hiddenFilterBtn.addEventListener("click", () => {
+    // class에 hidden 추가/삭제로 토글
+    // 수정: md:를 안붙이고 hidden만 없애려고 함..
+    // 수정2: 앞에 공백을 안줘서 사이드바가 안들어간거였음
+    if (desktopSidebar.className.includes(" md:hidden")) {
+      desktopSidebar.className = desktopSidebar.className.replace(
+        " md:hidden",
+        ""
+      );
+    } else {
+      desktopSidebar.className += " md:hidden";
     }
   });
 }
