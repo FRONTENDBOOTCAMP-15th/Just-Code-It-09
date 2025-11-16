@@ -87,22 +87,17 @@ const imgOff = "/src/assets/img/Property 1=Off.png";
 const checkboxImgs = document.querySelectorAll(".checkbox-img");
 
 checkboxImgs.forEach((img) => {
-  const targetId = img.getAttribute("data-target");
-  const checkbox = document.getElementById(targetId!) as HTMLInputElement;
+  // data-target으로 특정 체크박스 가져오기
+  const checkbox = document.getElementById(
+    img.getAttribute("data-target")!
+  ) as HTMLInputElement;
 
   img.addEventListener("click", () => {
-    checkbox.checked = !checkbox.checked;
-    updateCheckboxImage(checkbox, img as HTMLImageElement);
+    // FIXME 왜 체크가 안되는지..
+    if (checkbox.checked) {
+      img.setAttribute("src", imgOn);
+    } else {
+      img.setAttribute("src", imgOff);
+    }
   });
-
-  checkbox.addEventListener("change", () =>
-    updateCheckboxImage(checkbox, img as HTMLImageElement)
-  );
 });
-
-function updateCheckboxImage(
-  checkbox: HTMLInputElement,
-  img: HTMLImageElement
-) {
-  img.src = checkbox.checked ? imgOn : imgOff;
-}
