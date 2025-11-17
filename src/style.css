@@ -45,3 +45,12 @@
 body {
   font-family: "Noto Sans Regular", sans-serif;
 }
+
+@media (min-width: 768px) {
+  #sport-track .sport-card {
+    width: calc((100% - 2rem) / 3); /* gap-4(=16px) 기준으로 3개 나열 */
+  }
+}
+
+
+style.css
