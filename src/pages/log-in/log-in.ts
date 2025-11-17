@@ -34,3 +34,64 @@ if (pwdInput && pwdToggle && eyeIcon) {
     }
   });
 }
+
+// 이메일 입력 후 계속 클릭 시 비밀번호 입력하는 화면으로 전환
+const formEmail = document.getElementById(
+  "form-email"
+) as HTMLFormElement | null;
+const formPassword = document.getElementById(
+  "form-password"
+) as HTMLFormElement | null;
+const stepEmail = (document.getElementById("setp-email") ||
+  document.getElementById("step-email")) as HTMLElement | null; // 오타 대응
+const stepPassword = document.getElementById(
+  "step-password"
+) as HTMLElement | null;
+const emailInput = document.getElementById("email") as HTMLInputElement | null;
+const emailEcho = document.getElementById("emailEcho") as HTMLElement | null;
+const btnPrev = document.querySelector<HTMLButtonElement>(
+  "#step-password .btn.ghost"
+); // '이전' 버튼
+
+function show(el?: HTMLElement | null) {
+  if (!el) return;
+  el.classList.remove("hidden");
+  el.removeAttribute("inert");
+}
+function hide(el?: HTMLElement | null) {
+  if (!el) return;
+  el.classList.add("hidden");
+  el.setAttribute("inert", ""); // 접근성: 포커스 막기
+}
+
+// 이메일 → 비밀번호 스텝
+formEmail?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!emailInput) return;
+
+  // HTML5 유효성 체크
+  if (!emailInput.checkValidity()) {
+    emailInput.reportValidity();
+    return;
+  }
+
+  // 이메일 표시(선택: 마스킹)
+  const v = emailInput.value.trim();
+  if (emailEcho) {
+    emailEcho.textContent = v;
+  }
+
+  hide(stepEmail);
+  show(stepPassword);
+
+  // 포커스 이동
+  const pwd = document.getElementById("password") as HTMLInputElement | null;
+  pwd?.focus();
+});
+
+// '이전' 버튼 → 이메일 스텝으로
+btnPrev?.addEventListener("click", () => {
+  hide(stepPassword);
+  show(stepEmail);
+  emailInput?.focus();
+});
