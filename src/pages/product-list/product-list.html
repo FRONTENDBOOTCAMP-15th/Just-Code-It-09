@@ -12,16 +12,16 @@
     <main class="flex-1">
       <div class="sticky top-0 left-0 right-0 z-50 bg-white">
         <div
-          class="flex flex-col md:flex-row justify-between items-center w-full max-w-[1920px] mx-auto px-6"
+          class="flex flex-col md:flex-row justify-between items-center md:w-full md:max-w-[1920px] md:mx-auto md:px-6"
         >
           <div class="p-2">
             <!-- md: 신제품 개수 출력해야함 api 연결 -->
-            <span class="text-xl md:text-lg">신제품</span>
+            <span class="hidden text-xl md:text-lg">신제품</span>
           </div>
           <!-- 모바일 카테고리 -->
           <div
             id="mobile-category"
-            class="flex overflow-x-auto gap-4 text-base scrollbar-hide border-b-gray-200 border-b md:hidden"
+            class="flex w-full overflow-x-auto gap-4 text-base scrollbar-hide border-b-gray-200 border-b md:hidden"
           >
             <button class="p-4 whitespace-nowrap">신발</button>
             <button class="whitespace-nowrap">탑 & 티셔츠</button>
@@ -38,21 +38,20 @@
           </div>
           <!-- 모바일 필터바 -->
           <div
-            class="flex justify-between items-center text-base px-5 py-3.5 md:hidden"
+            class="flex w-full justify-between items-center text-base px-5 py-3.5 md:hidden"
           >
             <span class="text-gray-400">741개의 결과</span>
-            <div class="flex flex-row items-center">
-              <button
-                class="flex flex-row justify-center items-center w-24 border border-gray-300 rounded-4xl p-1"
-              >
-                <span class="text-base">필터</span>
-                <img
-                  src="/src/assets/img/Icon24px.png"
-                  alt="필터"
-                  class="w-6 h-6"
-                />
-              </button>
-            </div>
+
+            <button
+              class="flex flex-row justify-center items-center w-24 border border-gray-300 rounded-4xl p-1"
+            >
+              <span class="text-base">필터</span>
+              <img
+                src="/src/assets/img/Icon24px.png"
+                alt="필터"
+                class="w-6 h-6"
+              />
+            </button>
           </div>
           <!-- 데스크탑 필터바 -->
           <div class="hidden md:flex flex-row items-center">
@@ -93,7 +92,7 @@
           </div>
         </div>
       </div>
-      <div class="flex w-full max-w-[1920px] mx-auto px-6">
+      <div class="flex w-full max-w-[1920px] mx-auto md:px-6">
         <!-- 데스크탑 사이드바 -->
         <div
           id="desktop-sidebar"
