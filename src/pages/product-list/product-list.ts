@@ -2,6 +2,8 @@ import { AxiosError } from "axios";
 import { getAxios } from "../../utils/axios";
 import type { ProductList, ProductListRes } from "../../utils/types";
 import { codes } from "../../utils/categories";
+import imgOn from "/src/assets/img/checkOn.svg";
+import imgOff from "/src/assets/img/checkOff.png";
 
 async function showList() {
   const axios = getAxios();
@@ -102,10 +104,12 @@ function setSort(value: string) {
     params.set("sort", value);
   }
 
+  // 브라우저 새로고침해서 정렬 ㄱㄱ
   window.location.href = url.pathname + "?" + params.toString();
 }
+
 document.getElementById("recommend")?.addEventListener("click", () => {
-  setSort("");
+  setSort('{"extra.isNew": -1, "extra.isBest": -1}');
 });
 
 document.getElementById("isNew")?.addEventListener("click", () => {
@@ -141,9 +145,6 @@ if (hiddenFilterBtn && desktopSidebar) {
 }
 
 // checkbox img로 on/off
-const imgOn = "/src/assets/img/Property 1=On.svg";
-const imgOff = "/src/assets/img/Property 1=Off.png";
-
 const checkboxImgs = document.querySelectorAll(".checkbox-img");
 
 checkboxImgs.forEach((img) => {
