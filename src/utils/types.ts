@@ -94,3 +94,45 @@ export type ProductDetailRes =
       item: ProductItem;
     }
   | ApiError;
+
+// ------회원가입/로그인 관련 타입------
+export interface UserInfo {
+  _id: number;
+  email: string;
+  name: string;
+  type: "user" | "seller";
+
+  password?: string;
+  phone?: string;
+  address?: string;
+  image?: string;
+}
+
+export interface SignupBody {
+  email: string;
+  password: string;
+  name: string;
+  type: "user" | "seller";
+
+  phone?: string;
+  address?: string;
+  image?: string;
+}
+
+export type SignupRes =
+  | {
+      ok: 1;
+      item: UserInfo;
+    }
+  | ApiError;
+
+export interface LoginBody {
+  email: string;
+  password: string;
+}
+
+export type LoginRes = {
+  accessToken: string;
+
+  user: UserInfo;
+};
