@@ -55,7 +55,7 @@ export interface ApiError {
   message: string;
 }
 
-// product-detail.ts - test용
+// - product-detail.ts -
 export interface ProductItem {
   _id: number;
   seller_id: number;
