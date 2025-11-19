@@ -9,13 +9,13 @@
     <script type="module" src="./cart.ts"></script>
   </head>
   <body
-    class="min-h-screen items-start sm:items-center justify-center font-['Noto_Sans_KR']"
+    class="min-h-screen items-start sm:items-center justify-center pb-[67px] font-['Noto_Sans_KR']"
   >
     <!-- 헤더 -->
     <nike-header></nike-header>
     <!-- 장바구니 -->
     <section
-      class="cart flex-col w-full px-4 pb-[67px]"
+      class="cart max-w-4xl mx-auto flex-col w-full px-4 pb-[67px]"
       aria-labelledby="cart-title"
     >
       <header
@@ -40,6 +40,7 @@
       <!-- 장바구니 아이템 -->
       <article
         class="cart-item border-t border-b border-gray-300 pb-10"
+        data-cart-id="123"
         data-sku="zoom_vomero_5"
         aria-label="상품명"
       >
@@ -52,7 +53,10 @@
               class="cart-item__media w-[154px] h-[154px] shrink-0 bg-gray-100 overflow-hidden"
             >
               <a href="#" class="cart-item__thumb">
-                <img src="shoe.jpg" alt="상품명" />
+                <img
+                  src="https://res.cloudinary.com/ddedslqvv/image/upload/v1762907711/febc15-vanilla09-ecad/tLjdVLBdJ1.webp"
+                  alt="상품명"
+                />
               </a>
             </div>
 
@@ -154,16 +158,6 @@
             </div>
           </div>
         </div>
-        <div class="cart-item__shipping">
-          <p class="ship__badge font-normal">무료 배송</p>
-          <p class="ship__eta font-light">
-            도착 예정일: <time datetime="2025-07-27">7월 27일 (토)</time> 배송
-            지역:
-            <a class="ship__zip underline underline-offset-2 font-normal"
-              >04628</a
-            >
-          </p>
-        </div>
       </article>
 
       <!-- 주문 내역 -->
@@ -217,7 +211,10 @@
               class="cart-item__media w-[154px] h-[154px] shrink-0 bg-gray-100 overflow-hidden"
             >
               <a href="#" class="cart-item__thumb">
-                <img src="shoe.jpg" alt="상품명" />
+                <img
+                  src="https://res.cloudinary.com/ddedslqvv/image/upload/v1762907711/febc15-vanilla09-ecad/tLjdVLBdJ1.webp"
+                  alt="상품명"
+                />
               </a>
             </div>
 
@@ -250,7 +247,10 @@
               class="cart-item__media w-[154px] h-[154px] shrink-0 bg-gray-100 overflow-hidden"
             >
               <a href="#" class="cart-item__thumb">
-                <img src="shoe.jpg" alt="상품명" />
+                <img
+                  src="https://res.cloudinary.com/ddedslqvv/image/upload/v1762907711/febc15-vanilla09-ecad/tLjdVLBdJ1.webp"
+                  alt="상품명"
+                />
               </a>
             </div>
 
