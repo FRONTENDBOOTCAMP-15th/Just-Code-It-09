@@ -19,14 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
 // -------------------- 장바구니 목록 조회 --------------------
 
 async function initCartPage() {
-  const accessToken = localStorage.getItem("accessToken");
   const cartSection = document.querySelector<HTMLElement>(".cart");
   if (!cartSection) return;
 
   try {
     const res = await api.get<CartListRes>("/carts/", {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuuwleyngOydgCIsImVtYWlsIjoidGVzdDFAbmF2ZXIuY29tIiwibG9naW5UeXBlIjoiZW1haWwiLCJpYXQiOjE3NjM1MTg4MjgsImV4cCI6MTc2MzYwNTIyOCwiaXNzIjoiRkVCQyJ9.fsu0ucwueSxpFjsxyJ8jB-p5djJfl4zJ6pNWrnTXgX4",
       },
     });
     const data = res.data;
@@ -79,7 +79,7 @@ function renderCart(items: CartItem[]) {
             
             <!-- 상품 이미지 -->
             <div class="cart-item__media w-[154px] h-[154px] shrink-0 bg-gray-100 overflow-hidden">
-              <img src="${product.image?.path || ""}" alt="${product.name}" />
+              <img src="${product.image?.[0]?.path || ""}" alt="${product.name}" />
             </div>
 
             <!-- 상품 정보 -->
@@ -90,7 +90,7 @@ function renderCart(items: CartItem[]) {
               <dl class="cart-item__meta text-gray-500 font-light space-y-1">
                 <div class="cart-item__meta-row">
                   <dt>사이즈</dt>
-                  <dd class="cart-item__size underline">${product.extra?.sort ?? " "}</dd>
+                  <dd class="cart-item__size underline">${product.extra?.sort ?? "-"}</dd>
                 </div>
                 <div class="cart-item__meta-row">
                   <dt>수량</dt>
@@ -121,44 +121,10 @@ function renderCart(items: CartItem[]) {
                 </div>
               </dl>
 
-              <div class="cart-item__actions flex-col space-x-1">
-                <button
-                  type="button"
-                  class="btn-like"
-                  aria-label="관심상품에 추가"
-                >
-                  <svg
-                    width="24"
-                    height="33"
-                    viewBox="0 0 24 33"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M16.794 7.75002C18.118 7.75002 19.362 8.26602 20.298 9.20102C21.2262 10.1309 21.7475 11.3911 21.7475 12.705C21.7475 14.0189 21.2262 15.2791 20.298 16.209L12 24.508L3.70096 16.209C2.77307 15.2791 2.25195 14.0192 2.25195 12.7055C2.25195 11.3919 2.77307 10.1319 3.70096 9.20202C4.15999 8.74032 4.70604 8.37425 5.30751 8.12501C5.90897 7.87578 6.5539 7.74832 7.20496 7.75002C8.52896 7.75002 9.77296 8.26602 10.709 9.20102L11.469 9.96102L12 10.492L12.53 9.96102L13.29 9.20102C13.7492 8.73963 14.2953 8.37384 14.8967 8.12478C15.4982 7.87573 16.143 7.74835 16.794 7.75002Z"
-                      stroke="#111111"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                </button>
-                <button type="button" class="btn-remove" aria-label="상품 삭제">
-                  <svg
-                    width="24"
-                    height="33"
-                    viewBox="0 0 24 33"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M14.25 11.5V23.5M9.75 11.5V23.5M5.25 10V23.5C5.25 24.74 6.26 25.75 7.5 25.75H16.5C17.74 25.75 18.75 24.74 18.75 23.5V9.25M18.75 9.25H21.5M18.75 9.25H21M9 6.25H14.25C15.08 6.25 15.75 6.92 15.75 7.75C15.75 8.58 15.08 9.25 14.25 9.25H3"
-                      stroke="#111111"
-                      stroke-width="1.5"
-                      stroke-miterlimit="10"
-                    />
-                  </svg>
-                </button>
-              </div>
-              
+              <!-- 삭제 버튼 -->
+              <button type="button" class="btn-remove mt-2" aria-label="상품 삭제">
+                🗑 삭제
+              </button>
             </div>
           </div>
 

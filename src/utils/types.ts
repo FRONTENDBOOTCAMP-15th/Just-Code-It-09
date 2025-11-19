@@ -165,28 +165,8 @@ export interface CartInfo {
 
 export interface CartItem {
   _id: number;
-  product_id: number;
   quantity: number;
-  createdAt: string;
-  updatedAt: string;
-  product: {
-    _id: number;
-    name: string;
-    price: number;
-    seller_id: number;
-    quantity: number;
-    buyQuantity: number;
-    image: {
-      path: string;
-      name: string;
-    };
-    extra: {
-      isNew: boolean;
-      isBest: boolean;
-      category: string[];
-      sort: number;
-    };
-  };
+  item: CartInfo;
 }
 
 // 장바구니 목록 조회 응답
