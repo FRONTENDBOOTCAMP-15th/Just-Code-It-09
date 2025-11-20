@@ -36,6 +36,18 @@ async function showList() {
 }
 
 function render(products: ProductList[]) {
+  const productBody = document.querySelector("#productBody");
+  if (!productBody) return;
+
+  if (products.length === 0) {
+    productBody.innerHTML = `
+      <div class="col-span-3 align-center text-center whitespace-nowrap py-10 text-gray-500 text-base md:text-2xl">
+        죄송합니다. 조건에 맞는 상품을 찾을 수 없습니다.
+      </div>
+    `;
+    return;
+  }
+
   const result = products.map((product) => {
     const color = product.extra?.color
       ? product.extra.color.split(" ").length
@@ -68,7 +80,7 @@ function render(products: ProductList[]) {
           </div>
         `;
   });
-  const productBody = document.querySelector("#productBody");
+
   if (productBody) {
     productBody.innerHTML = result.join("");
 
@@ -153,6 +165,37 @@ if (hiddenFilterBtn && desktopSidebar) {
     }
   });
 }
+function initPriceCheckbox() {
+  const url = new URL(window.location.href);
+  const minPrice = Number(url.searchParams.get("minPrice") ?? 0);
+  const maxPrice = Number(url.searchParams.get("maxPrice") ?? 0);
+
+  const checkboxMap: Record<string, [number, number]> = {
+    "under-5": [0, 50000],
+    "under-10": [50000, 100000],
+    "under-15": [100000, 150000],
+    "under-20": [150000, 200000],
+  };
+
+  Object.entries(checkboxMap).forEach(([id, [min, max]]) => {
+    const checkbox = document.getElementById(id) as HTMLInputElement | null;
+    const img = document.querySelector(
+      `.checkbox-img[data-target="${id}"]`
+    ) as HTMLImageElement | null;
+    if (!checkbox || !img) return;
+
+    if (minPrice === min && maxPrice === max) {
+      checkbox.checked = true;
+      img.setAttribute("src", imgOn);
+    } else {
+      checkbox.checked = false;
+      img.setAttribute("src", imgOff);
+    }
+  });
+}
+
+// 페이지 로드 시 실행
+initPriceCheckbox();
 
 // checkbox img로 on/off
 const checkboxImgs = document.querySelectorAll(".checkbox-img");
