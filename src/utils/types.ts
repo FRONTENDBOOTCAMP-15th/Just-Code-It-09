@@ -130,12 +130,14 @@ export interface ApiError1 {
   message: string;
 }
 
-export type LoginRes = {
-  accessToken: string;
+// export type LoginRes = {
+//   accessToken: string;
+//   user: UserInfo;
+// };
 
-  user: UserInfo;
-};
-
+export type ApiResponse<T> = ApiSuccess<T> | ApiError1;
+export type RegisterRes = ApiResponse<UserInfo>;
+export type LoginRes = ApiResponse<LoginUser>;
 // ------ 장바구니 관련 타입 ------
 export interface CartInfo {
   _id: number;
