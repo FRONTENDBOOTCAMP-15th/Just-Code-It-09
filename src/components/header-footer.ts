@@ -1,12 +1,58 @@
-// 웹 컴포넌트(Web Components)”로 헤더를 만들기 위한 커스텀 엘리먼트 클래스
 class NikeHeader extends HTMLElement {
   connectedCallback() {
     this.render();
     setTimeout(() => this.updateLoginStatus(), 0);
+    this.addSearchEvent();
+
+    const searchToggle = this.querySelector(
+      "#search-toggle"
+    ) as HTMLElement | null;
+    const searchForm = this.querySelector("#search-form") as HTMLElement | null;
+    const searchClose = this.querySelector(
+      "#search-close"
+    ) as HTMLElement | null;
+
+    if (searchToggle && searchForm && searchClose) {
+      searchToggle.addEventListener("click", () => {
+        searchForm.classList.remove("w-0", "opacity-0", "scale-x-0");
+        searchForm.classList.add("w-[160px]", "opacity-100", "scale-x-100");
+        searchToggle.classList.add("hidden");
+      });
+
+      searchClose.addEventListener("click", () => {
+        searchForm.classList.add("w-0", "opacity-0", "scale-x-0");
+        searchForm.classList.remove("w-[160px]", "opacity-100", "scale-x-100");
+        searchToggle.classList.remove("hidden");
+      });
+    }
   }
 
-  // UI를 렌더링
   render() {
+    const token = localStorage.getItem("accessToken");
+
+    // 토큰 있을 때 위시리스트 아이콘
+    const profileOrWishlist = token
+      ? `
+      <a href="/src/pages/wish-list/wish-list.html" class="rounded-3xl hover:bg-[#E5E5E5] -translate-y-0.5">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <path
+            d="M22.794 9.75002C24.118 9.75002 25.362 10.266 26.298 11.201C27.2262 12.1309 27.7475 13.3911 27.7475 14.705C27.7475 16.0189 27.2262 17.2791 26.298 18.209L18 26.508L9.70096 18.209C8.77307 17.2791 8.25195 16.0192 8.25195 14.7055C8.25195 13.3919 8.77307 12.1319 9.70096 11.202C10.16 10.7403 10.706 10.3743 11.3075 10.125C11.909 9.87578 12.5539 9.74832 13.205 9.75002C14.529 9.75002 15.773 10.266 16.709 11.201L17.469 11.961L18 12.492L18.53 11.961L19.29 11.201C19.7492 10.7396 20.2953 10.3738 20.8967 10.1248C21.4982 9.87573 22.143 9.74835 22.794 9.75002Z"
+            stroke="#111111" stroke-width="1.5"
+          />
+        </svg>
+      </a>`
+      : // 토큰 없을 때 프로필(로그인) 아이콘
+        `
+      <a href="/src/pages/log-in/log-in.html" class="rounded-3xl hover:bg-[#E5E5E5] -translate-y-0.5">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <path
+            d="M9.75 27V24C9.75 23.0054 10.1451 22.0516 10.8483 21.3483C11.5516 20.6451 12.5054 20.25 13.5 20.25H22.5C23.4946 20.25 24.4484 20.6451 25.1517 21.3483C25.8549 22.0516 26.25 23.0054 26.25 24V27M18 9.75C17.0054 9.75 16.0516 10.1451 15.3483 10.8483C14.6451 11.5516 14.25 12.5054 14.25 13.5C14.25 14.4946 14.6451 15.4484 15.3483 16.1517C16.0516 16.8549 17.0054 17.25 18 17.25C18.9946 17.25 19.9484 16.8549 20.6517 16.1517C21.3549 15.4484 21.75 14.4946 21.75 13.5C21.75 12.5054 21.3549 11.5516 20.6517 10.8483C19.9484 10.1451 18.9946 9.75 18 9.75Z"
+            stroke="#111111" stroke-width="1.5"
+          />
+        </svg>
+      </a>
+    `;
+
     this.innerHTML = `
       <header class="w-full">
         <!-- 모바일 헤더 (로고 + 검색/프로필/장바구니/햄버거) -->
@@ -14,7 +60,7 @@ class NikeHeader extends HTMLElement {
           <div class="mx-auto max-w-[1920px] px-4">
             <div class="h-[60px] flex items-center justify-between">
               <!-- 로고 (왼쪽) -->
-              <a href="./index.html" class="flex items-center">
+              <a href="/src/pages/home/home.html" class="flex items-center">
                 <svg
                   width="76"
                   height="60"
@@ -31,51 +77,63 @@ class NikeHeader extends HTMLElement {
                 </svg>
               </a>
 
-              <!-- 오른쪽 아이콘들 -->
-              <div class="flex items-center gap-1">
-                <!-- 검색 아이콘 -->
-                <a href="/src/pages/home/home.html">
-                  <button
-                    type="button"
-                    class="w-9 h-9 rounded-full hover:bg-[#E5E5E5]"
-                  >
-                    <svg
-                      width="36"
-                      height="36"
-                      viewBox="0 0 36 36"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M19.962 22.296C18.916 22.9224 17.7192 23.2521 16.5 23.25C15.6134 23.2512 14.7353 23.0772 13.9162 22.7379C13.0971 22.3986 12.3531 21.9008 11.727 21.273C11.0992 20.6469 10.6014 19.9029 10.2621 19.0838C9.92284 18.2647 9.7488 17.3866 9.75001 16.5C9.75001 14.636 10.505 12.949 11.727 11.727C12.3531 11.0992 13.0971 10.6014 13.9162 10.2621C14.7353 9.92284 15.6134 9.7488 16.5 9.75001C18.364 9.75001 20.051 10.505 21.273 11.727C21.9008 12.3531 22.3986 13.0971 22.7379 13.9162C23.0772 14.7353 23.2512 15.6134 23.25 16.5C23.2517 17.6974 22.9338 18.8736 22.329 19.907C21.812 20.789 21.895 21.895 22.618 22.618L26.471 26.471"
-                        stroke="#111111"
-                        stroke-width="1.5"
-                      />
-                    </svg>
-                  </button>
-                </a>
+            <!-- 오른쪽 아이콘들 -->
+            <div class="flex items-center gap-1">
 
-                <!-- 프로필 아이콘 -->
-                <a href="/src/pages/log-in/log-in.html">
-                  <button
-                    type="button"
-                    class="w-9 h-9 rounded-full hover:bg-[#E5E5E5]"
+            <!-- 검색 바 -->
+             <form
+                id="search-form"
+                class="flex items-center gap-2 w-0 opacity-0 scale-x-0 overflow-hidden
+                      origin-left transition-all duration-300"
+              >
+                  <label for="search" class="sr-only">검색</label>
+                  <div
+                    class="flex items-center gap-2 h-10 rounded-3xl bg-[#f5f5f5] px-4 text-sm text-[#707072]"
                   >
-                    <svg
-                      width="36"
-                      height="36"
-                      viewBox="0 0 36 36"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9.75 27V24C9.75 23.0054 10.1451 22.0516 10.8483 21.3483C11.5516 20.6451 12.5054 20.25 13.5 20.25H22.5C23.4946 20.25 24.4484 20.6451 25.1517 21.3483C25.8549 22.0516 26.25 23.0054 26.25 24V27M18 9.75C17.0054 9.75 16.0516 10.1451 15.3483 10.8483C14.6451 11.5516 14.25 12.5054 14.25 13.5C14.25 14.4946 14.6451 15.4484 15.3483 16.1517C16.0516 16.8549 17.0054 17.25 18 17.25C18.9946 17.25 19.9484 16.8549 20.6517 16.1517C21.3549 15.4484 21.75 14.4946 21.75 13.5C21.75 12.5054 21.3549 11.5516 20.6517 10.8483C19.9484 10.1451 18.9946 9.75 18 9.75Z"
-                        stroke="#111111"
-                        stroke-width="1.5"
-                      />
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19.962 22.296C18.916 22.9224 17.7192 23.2521 16.5 23.25C15.6134 23.2512 14.7353 23.0772 13.9162 22.7379C13.0971 22.3986 12.3531 21.9008 11.727 21.273C11.0992 20.6469 10.6014 19.9029 10.2621 19.0838C9.92284 18.2647 9.7488 17.3866 9.75001 16.5C9.75001 14.636 10.505 12.949 11.727 11.727C12.3531 11.0992 13.0971 10.6014 13.9162 10.2621C14.7353 9.92284 15.6134 9.7488 16.5 9.75001C18.364 9.75001 20.051 10.505 21.273 11.727C21.9008 12.3531 22.3986 13.0971 22.7379 13.9162C23.0772 14.7353 23.2512 15.6134 23.25 16.5C23.2517 17.6974 22.9338 18.8736 22.329 19.907C21.812 20.789 21.895 21.895 22.618 22.618L26.471 26.471" stroke="#111111" stroke-width="1.5"/>
                     </svg>
+                    <input
+                      id="search"
+                      type="search"
+                      placeholder="검색"
+                      class="w-full bg-[#F5F5F5] outline-none placeholder:text-[#707072]"
+                    />
+                  </div>
+                  <button
+                    id="search-close"
+                    type="button"
+                    class="text-[#707072] w-6 h-6 flex items-center justify-center"
+                  >
+                    ✕
                   </button>
-                </a>
+                </form>
+
+                <!-- 검색 아이콘 -->
+                <button
+                  id="search-toggle"
+                  type="search"
+                  class="w-9 h-9 rounded-full hover:bg-[#E5E5E5]"
+                >
+                  <svg
+                    width="36"
+                    height="36"
+                    viewBox="0 0 36 36"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19.962 22.296C18.916 22.9224 17.7192 23.2521 16.5 23.25C15.6134 23.2512 14.7353 23.0772 13.9162 22.7379C13.0971 22.3986 12.3531 21.9008 11.727 21.273C11.0992 20.6469 10.6014 19.9029 10.2621 19.0838C9.92284 18.2647 9.7488 17.3866 9.75001 16.5C9.75001 14.636 10.505 12.949 11.727 11.727C12.3531 11.0992 13.0971 10.6014 13.9162 10.2621C14.7353 9.92284 15.6134 9.7488 16.5 9.75001C18.364 9.75001 20.051 10.505 21.273 11.727C21.9008 12.3531 22.3986 13.0971 22.7379 13.9162C23.0772 14.7353 23.2512 15.6134 23.25 16.5C23.2517 17.6974 22.9338 18.8736 22.329 19.907C21.812 20.789 21.895 21.895 22.618 22.618L26.471 26.471"
+                      stroke="#111111"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                </button>
+
+                
+                <!-- 토큰 유무에 따른 프로필 or 위시리스트 아이콘-->
+                ${profileOrWishlist}
+                
                 <!-- 장바구니 아이콘 -->
                 <a href="/src/pages/cart/cart.html">
                   <button
@@ -109,11 +167,6 @@ class NikeHeader extends HTMLElement {
                         />
                       </a>
                     </svg>
-                    <span
-                      id="cartCount"
-                      class="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-red-600 text-white text-xs flex items-center justify-center">
-                      0
-                    </span>
                   </button>
                 </a>
 
@@ -341,26 +394,41 @@ class NikeHeader extends HTMLElement {
     const accessToken = localStorage.getItem("accessToken");
 
     if (accessToken) {
-      // 로그인 상태면
       signupLink.style.display = "none";
-      sectionBar.style.display = "none"; // 막대도 숨김
+      sectionBar.style.display = "none";
       loginLink.style.display = "none";
       logoutLink.classList.remove("hidden");
     } else {
-      // 로그아웃 상태면
       signupLink.style.display = "flex";
-      sectionBar.style.display = "flex"; // 막대 다시 보이게
+      sectionBar.style.display = "flex";
       loginLink.style.display = "flex";
       logoutLink.classList.add("hidden");
     }
-
-    // 로그아웃 클릭 시 localStorage 초기화
     logoutButton.addEventListener("click", () => {
       localStorage.clear();
       signupLink.style.display = "flex";
       sectionBar.style.display = "flex";
       loginLink.style.display = "flex";
       logoutLink.classList.add("hidden");
+    });
+  }
+
+  addSearchEvent() {
+    const searchInput = this.querySelector(
+      "#search"
+    ) as HTMLInputElement | null;
+    if (!searchInput) return;
+
+    searchInput.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+
+        const keyword = searchInput.value.trim();
+        if (!keyword) return;
+
+        const url = `/src/pages/product-list/product-list.html?keyword=${encodeURIComponent(keyword)}`;
+        window.location.href = url;
+      }
     });
   }
 }
